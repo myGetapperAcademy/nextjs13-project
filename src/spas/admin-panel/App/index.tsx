@@ -3,7 +3,13 @@ import { CssBaseline, ThemeProvider } from "@mui/material";
 import { Routes, Route, BrowserRouter } from "react-router-dom";
 import { AppSnackbar } from "@/components/AppSnackbar";
 import useAppHooks from "./index.hooks";
-import { DashboardScene, LoginScene } from "@/spas/admin-panel/scenes";
+import {
+  DashboardScene,
+  LoginScene,
+  ProductDetailsScene,
+  ProductsScene,
+  UsersScene,
+} from "@/spas/admin-panel/scenes";
 import { Outlet } from "react-router";
 
 const App: React.FC = () => {
@@ -16,18 +22,12 @@ const App: React.FC = () => {
         <Routes>
           <Route path="/login" element={<LoginScene />} />
           <Route path="/dashboard" element={<DashboardScene />}>
+            <Route path="products" element={<ProductsScene />} />
+            <Route path="users" element={<UsersScene />} />
             <Route
-              path="users"
-              element={
-                <span>
-                  Users <Outlet />
-                </span>
-              }
-            >
-              <Route path="about" element={<span>About</span>} />
-              <Route path="contacts" element={<span>Contacts</span>} />
-            </Route>
-            <Route path="posts" element={<span>Posts</span>} />
+              path="products/:productId"
+              element={<ProductDetailsScene />}
+            />
           </Route>
           <Route path="/" element={<span>TEST</span>} />
         </Routes>
